@@ -796,7 +796,7 @@ const PresfastProductCard = () => {
   //const { contextData } = useContext(ProductContext);
   const auth = useContext(AuthContext);
   const [data, setData] = useState([]);
-
+  const [fetch, setRefetch] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -808,7 +808,7 @@ const PresfastProductCard = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [auth.token, fetch]);
 
   const [qtyBreak1, setQtyBreak1] = useState(500);
   const [qtyBreak2, setQtyBreak2] = useState(1500);
@@ -920,6 +920,10 @@ const PresfastProductCard = () => {
     // }
     const res = await uploadPresfastProduct(auth.token, newProductData);
     console.log(res);
+    resetForm();
+    setFiles([]);
+    setView(false);
+    setRefetch((p) => p + 1);
   };
 
   useEffect(() => {
@@ -1068,8 +1072,12 @@ const PresfastProductCard = () => {
                     <Card className="product-card">
                       <div className="product-thumb">
                         <Link to={`/product-details/${item._id}`}>
-                          {console.log("image url",item.prodImages)}
-                          <img className="card-img-top" src={item?.prodImages?.length>0?item.prodImages[0]:""} alt="item.prodName" />
+                          {console.log("image url", item.prodImages)}
+                          <img
+                            className="card-img-top"
+                            src={item?.prodImages?.length > 0 ? item.prodImages[0] : ""}
+                            alt="item.prodName"
+                          />
                         </Link>
                         {/* <ul className="product-badges">
                           {item.new && (

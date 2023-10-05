@@ -42,7 +42,7 @@ const Login = () => {
       setError(res.response.data.message);
       setLoading(false);
     }
-
+    setLoading(false);
     // const loginName = "info@softnio.com";
     // const pass = "123456";
     // if (formData.name === loginName && formData.passcode === pass) {

@@ -859,9 +859,9 @@ const HungryJackProductCard = () => {
     const res = await uploadHungryJackProduct(auth.token, newProductData);
     console.log(res);
     resetForm();
-    setRefetch((p) => p + 1);
     setFiles([]);
     setView(false);
+    setRefetch((p) => p + 1);
   };
 
   useEffect(() => {
