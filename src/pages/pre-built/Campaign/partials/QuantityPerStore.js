@@ -21,7 +21,7 @@ import {
 } from "../../../../components/Component";
 import { Badge } from "reactstrap";
 import { AuthContext } from "../../../../context/AuthContext";
-import { getStoreTypeOptions } from "../../../../utils/Api";
+import { createCampaign } from "../../../../utils/Api";
 
 const QuantityPerStore = ({ prevData, setPrevData, setStep }) => {
   const auth = useContext(AuthContext);
@@ -42,9 +42,31 @@ const QuantityPerStore = ({ prevData, setPrevData, setStep }) => {
     setTransformedProducts(updatedTransformedProducts);
   }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (currentData) => {
     console.log("finalData", prevData);
     console.log(transformedProducts, "prevData", prevData);
+
+    const postData = {
+      campaignInfo: { ...currentData.campaignInfo },
+      orderData: currentData.regionSelectionData.map((orderItem) => {
+        return {
+          keyNumber: orderItem.keyNumber,
+          quantityPerStore: orderItem.quantityPerStore,
+          extraQuantityPerStore: orderItem.extraQuantityPerStore,
+          presfastItem: { _id: orderItem.presfastItem.value },
+          hjProduct: { _id: orderItem._id },
+          selectedRegions: orderItem.regions.map((region) => region.value),
+          selectedStoreTypes: orderItem.selectedStoreTypes.map((type) => type.value),
+        };
+      }),
+    };
+    try {
+      const response = await createCampaign(auth.token, postData);
+      console.log("response", response);
+    } catch (error) {
+      console.log(error.response);
+    }
+    console.log("postData", postData);
   };
 
   return (

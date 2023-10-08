@@ -6,7 +6,7 @@ const CampaignInfo = ({ prevData, setPrevData, setStep }) => {
     promotionName: "",
     projectLead: "",
     jobNumber: "",
-    campaignLiveData: "",
+    campaignLiveDate: "",
     dueDate: "",
   });
 
@@ -20,7 +20,7 @@ const CampaignInfo = ({ prevData, setPrevData, setStep }) => {
       formData.promotionName === "" ||
       formData.projectLead === "" ||
       formData.jobNumber === "" ||
-      formData.campaignLiveData === "" ||
+      formData.campaignLiveDate === "" ||
       formData.dueDate === ""
     ) {
       alert("Please fill all the fields");
@@ -81,9 +81,9 @@ const CampaignInfo = ({ prevData, setPrevData, setStep }) => {
             className="form-control"
             type="date"
             placeholder="Live date"
-            value={formData.campaignLiveData}
+            value={formData.campaignLiveDate}
             onChange={(e) => {
-              setFormData({ ...formData, campaignLiveData: e.target.value });
+              setFormData({ ...formData, campaignLiveDate: e.target.value });
             }}
           />
         </div>

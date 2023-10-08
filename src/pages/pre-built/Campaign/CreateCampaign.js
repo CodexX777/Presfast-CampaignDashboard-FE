@@ -13,7 +13,7 @@ const CreateCampaign = () => {
       promotionName: "",
       projectLead: "",
       jobNumber: "",
-      campaignLiveData: "",
+      campaignLiveDate: "",
       dueDate: "",
     },
     selectedProducts: [],

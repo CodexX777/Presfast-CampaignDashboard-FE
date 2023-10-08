@@ -175,11 +175,27 @@ const getStoreTypeOptions = async (token, data) => {
   }
 };
 
+const createCampaign = async (token, data) => {
+  try {
+    const response = await api.post("/items/schedule-campaign", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export {
   login,
   getUsers,
   addUser,
   addStore,
+  createCampaign,
   getAllStores,
   uploadPresfastProduct,
   getAllPresfastProducts,
