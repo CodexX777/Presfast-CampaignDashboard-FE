@@ -434,8 +434,8 @@ export const notes = [
 
 export const filterStatus = [
   { value: "Active", label: "Active" },
-  { value: "Pending", label: "Pending" },
-  { value: "Suspend", label: "Suspend" },
+  { value: "Suspended", label: "Suspended" },
+  // { value: "Suspend", label: "Suspend" },
 ];
 
 export const filterRole = [

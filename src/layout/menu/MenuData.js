@@ -84,35 +84,45 @@ const menu = [
   // },
   {
     icon: "users-fill",
-    text: "User Manage",
-    active: false,
-    subMenu: [
-      {
-        text: "User List",
-        link: "/user-list-default",
-      },
-      // {
-      //   text: "User List - Regular",
-      //   link: "/user-list-regular",
-      // },
-      // {
-      //   text: "User List - Compact",
-      //   link: "/user-list-compact",
-      // },
-      // {
-      //   text: "User Details - Regular",
-      //   link: "/user-details-regular/1",
-      // },
-      // {
-      //   text: "User Profile - Regular",
-      //   link: "/user-profile-regular",
-      // },
-      {
-        text: "Add User",
-        link: "/user-contact-card",
-      },
-    ],
+    text: "User List",
+    link: "/user-list-default",
   },
+  {
+    icon: "user-add-fill",
+    text: "Add User",
+    link: "/user-contact-card",
+  },
+  // {
+  //   icon: "users-fill",
+  //   text: "User Manage",
+  //   active: false,
+  //   subMenu: [
+  //     {
+  //       text: "User List",
+  //       link: "/user-list-default",
+  //     },
+  //     // {
+  //     //   text: "User List - Regular",
+  //     //   link: "/user-list-regular",
+  //     // },
+  //     // {
+  //     //   text: "User List - Compact",
+  //     //   link: "/user-list-compact",
+  //     // },
+  //     // {
+  //     //   text: "User Details - Regular",
+  //     //   link: "/user-details-regular/1",
+  //     // },
+  //     // {
+  //     //   text: "User Profile - Regular",
+  //     //   link: "/user-profile-regular",
+  //     // },
+  //     {
+  //       text: "Add User",
+  //       link: "/user-contact-card",
+  //     },
+  //   ],
+  // },
 
   // {
   //   icon: "cc-alt2-fill",
@@ -181,28 +191,37 @@ const menu = [
   //   ],
   // },
   {
-    icon: "card-view",
-    text: "Products",
-    active: false,
-    subMenu: [
-      {
-        text: "Presfast product List",
-        link: "/presfast-list",
-      },
-      // {
-      //   text: "Product Card",
-      //   link: "/product-card",
-      // },
-      // {
-      //   text: "Product Details",
-      //   link: "/product-details/0",
-      // },
-      {
-        text: "Hungry Jack's product List",
-        link: "/hungry-jack-list",
-      }
-    ],
+    icon: "grid-alt-fill",
+    text: "Presfast products",
+    link: "/presfast-list",
   },
+  {
+    icon: "grid-alt-fill",
+    text: "Hungry Jack's products",
+    link: "/hungry-jack-list",
+  },
+  {
+    icon: "grid-alt-fill",
+    text: "Stores",
+    link: "/stores",
+  }
+  // {
+  //   icon: "card-view",
+  //   text: "Products",
+  //   active: false,
+  //   subMenu: [
+     
+  //     // {
+  //     //   text: "Product Card",
+  //     //   link: "/product-card",
+  //     // },
+  //     // {
+  //     //   text: "Product Details",
+  //     //   link: "/product-details/0",
+  //     // },
+    
+  //   ],
+  // },
   
   // {
   //   icon: "file-docs",

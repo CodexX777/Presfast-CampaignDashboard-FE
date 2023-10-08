@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Form } from "reactstrap";
 import { Icon, Col, Button, RSelect } from "../../../components/Component";
 import { useForm } from "react-hook-form";
 import { filterStatus } from "./UserData";
-
+import { addUser } from "../../../utils/Api";
+import { AuthContext } from "../../../context/AuthContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const roleOptions = [
   { label: "Admin", value: "Admin" },
-  { label: "Campaign Manager", value: "Campaign Manager" },
-  { label: "Marketing Manager", value: "Marketing Manager" },
-  { label: "Distribution Team Member", value: "Distribution Team Member" },
+  // { label: "Campaign Manager", value: "Campaign Manager" },
+  { label: "HJ's Marketing Team", value: "HJ's Marketing Team" },
+  // { label: "Distribution Team Member", value: "Distribution Team Member" },
 ];
 
 const AddModal = () => {
+  const auth = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,11 +32,27 @@ const AddModal = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // Handle the form submission here.
     console.log(formData); // You can replace this with your actual submission logic.
+    let res;
 
+    try {
+      res = await addUser(auth.token, formData);
+      toast.success("User added successfully");
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.log(error);
+    }
     // Optionally, you can reset the form after successful submission.
+    setFormData({
+      name: "",
+      email: "",
+      role: "",
+      phone: "",
+      status: "",
+      password: "",
+    });
     reset({
       name: "",
       email: "",
@@ -52,7 +72,7 @@ const AddModal = () => {
   };
 
   return (
-    <div className="p-2">
+    <div className="p-4" style={{marginTop:"65px"}}>
       <h5 className="title">Add User</h5>
       <div className="mt-4">
         <Form className="row gy-4 p-4" noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -158,18 +178,6 @@ const AddModal = () => {
                   Add User
                 </Button>
               </li>
-              {/* <li>
-                <a
-                  href="#cancel"
-                  onClick={(ev) => {
-                    ev.preventDefault();
-                    // Handle cancel action here (e.g., navigate back to a different page).
-                  }}
-                  className="link link-light"
-                >
-                  Cancel
-                </a>
-              </li> */}
             </ul>
           </Col>
         </Form>

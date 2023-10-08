@@ -9,9 +9,11 @@ import HungryJackProductCard from "./pages/pre-built/products/HungryJackProductC
 import { AuthContext } from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth";
 import { Navigate } from "react-router-dom";
-
 import Login from "./pages/auth/Login";
-
+import StoreList from "./pages/pre-built/stores/StoreList";
+import Dashboard from "./pages/pre-built/dashboard/Dashboard";
+import AddStore from "./pages/pre-built/stores/AddStore";
+import CreateCampaign from "./pages/pre-built/Campaign/CreateCampaign";
 const App = () => {
   const { isLoggedIn, token, login, logout, uid, userName, role } = useAuth();
 
@@ -20,12 +22,16 @@ const App = () => {
   if (isLoggedIn) {
     routes = (
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path={`${process.env.PUBLIC_URL}`} element={<Layout />}>
+          <Route path="/" element={<Dashboard />}></Route>
           <Route path="/user-list-default" element={<UserListDefault />}></Route>
           <Route path="/user-contact-card" element={<AddModal />}></Route>
           <Route path="/presfast-list" element={<PresfastProductCard />}></Route>
           <Route path="/hungry-jack-list" element={<HungryJackProductCard />}></Route>
-          <Route path="*" element={<Navigate replace to="/user-list-default" />} />
+          <Route path="/stores" element={<StoreList />}></Route>
+          <Route path="/add-store" element={<AddStore />}></Route>
+          <Route path="/create-campaign" element={<CreateCampaign />}></Route>
+          <Route path="*" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>
     );

@@ -5,25 +5,25 @@ const api = axios.create({
 });
 
 const login = async (email, password, token) => {
-  // try {
-  const response = await api.post(
-    "/auth/login",
-    {
-      email,
-      password,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
+  try {
+    const response = await api.post(
+      "/auth/login",
+      {
+        email,
+        password,
       },
-    }
-  );
-  console.log(response.data);
-  return response;
-  // } catch (error) {
-  //   console.error(error);
-  //   return error;
-  // }
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response.data);
+    return response;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
 };
 
 const getUsers = async (token) => {
@@ -111,11 +111,79 @@ const getAllHungryJackProducts = async (token) => {
   }
 };
 
+const addUser = async (token, data) => {
+  let response;
+  try {
+    response = await api.post("/admin/add-user", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const addStore = async (token, data) => {
+  try {
+    const response = await api.post("/admin/add-store", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const getAllStores = async (token) => {
+  try {
+    const response = await api.get("/admin/get-stores", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const getStoreTypeOptions = async (token, data) => {
+  try {
+    const response = await api.post(
+      "/items/get-store-type-options",
+      { regionList: data },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export {
   login,
   getUsers,
+  addUser,
+  addStore,
+  getAllStores,
   uploadPresfastProduct,
   getAllPresfastProducts,
   uploadHungryJackProduct,
+  getStoreTypeOptions,
   getAllHungryJackProducts,
 };
