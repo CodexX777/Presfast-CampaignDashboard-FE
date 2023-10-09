@@ -62,6 +62,7 @@ const PresfastProductCard = () => {
     description: "",
     unitPrice: 0,
     category: "",
+    prodInitials: "",
   });
   const [view, setView] = useState(false);
   const [filter, setFilter] = useState("");
@@ -76,6 +77,7 @@ const PresfastProductCard = () => {
       description: "",
       unitPrice: 0,
       category: "",
+      prodInitials: "",
     });
     reset({});
   };
@@ -138,6 +140,7 @@ const PresfastProductCard = () => {
     newProductData.append("prodName", form.name);
     newProductData.append("prodDesc", form.description);
     newProductData.append("unitPrice", form.unitPrice);
+    newProductData.append("prodInitials", form.prodInitials);
     newProductData.append("category", form.category);
     // newProductData.append("prodImages", files);
     console.log("files", newProductData);
@@ -347,6 +350,23 @@ const PresfastProductCard = () => {
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                       />
                       {errors.category && <span className="invalid">{errors.category.message}</span>}
+                    </div>
+                  </div>
+                </Col>
+                <Col size="12">
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="product-title">
+                      Product Initials
+                    </label>
+                    <div className="form-control-wrap">
+                      <input
+                        type="text"
+                        {...register("prodInitials", { required: "Product Initials field is required" })}
+                        className="form-control"
+                        value={formData.prodInitials}
+                        onChange={(e) => setFormData({ ...formData, prodInitials: e.target.value })}
+                      />
+                      {errors.prodInitials && <span className="invalid">{errors.prodInitials.message}</span>}
                     </div>
                   </div>
                 </Col>
