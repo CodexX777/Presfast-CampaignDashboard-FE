@@ -40,7 +40,12 @@ const Dashboard = () => {
                 <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
                     <li>
-                      <Button color="primary" onClick={() => {}}>
+                      <Button
+                        color="primary"
+                        onClick={() => {
+                          navigate("/past-campaigns");
+                        }}
+                      >
                         <Icon name="reports" />
                         <span>View past campaigns</span>
                       </Button>

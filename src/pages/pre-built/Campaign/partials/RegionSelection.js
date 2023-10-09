@@ -37,7 +37,9 @@ const regionOptions = [
 const RegionSelection = ({ prevData, setPrevData, setStep }) => {
   const [selectedProducts, setSelectedProducts] = useState([...prevData?.selectedProducts]);
 
-  const [transformedProducts, setTransformedProducts] = useState([]);
+  const [transformedProducts, setTransformedProducts] = useState(
+    prevData?.regionSelectionData?.length > 0 ? [...prevData?.regionSelectionData] : []
+  );
   useEffect(() => {
     // Iterate through selectedProducts and presfastItems to create 1-to-1 relation
     const transformedData = [];

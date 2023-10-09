@@ -190,13 +190,43 @@ const createCampaign = async (token, data) => {
   }
 };
 
+const getRecentCampaignList = async (token) => {
+  try {
+    const response = await api.get("/items/get-recent-campaign-list", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const getCampaignList = async (token) => {
+  try {
+    const response = await api.get("/items/get-campaign-list", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export {
   login,
   getUsers,
   addUser,
   addStore,
   createCampaign,
+  getCampaignList,
   getAllStores,
+  getRecentCampaignList,
   uploadPresfastProduct,
   getAllPresfastProducts,
   uploadHungryJackProduct,
