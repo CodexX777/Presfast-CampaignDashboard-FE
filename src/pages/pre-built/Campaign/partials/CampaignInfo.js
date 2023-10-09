@@ -26,8 +26,7 @@ const CampaignInfo = ({ prevData, setPrevData, setStep }) => {
       formData.promotionName === "" ||
       formData.projectLead === "" ||
       formData.jobNumber === "" ||
-      formData.campaignLiveDate === "" ||
-      formData.dueDate === ""
+      formData.campaignLiveDate === ""
     ) {
       alert("Please fill all the fields");
       return;

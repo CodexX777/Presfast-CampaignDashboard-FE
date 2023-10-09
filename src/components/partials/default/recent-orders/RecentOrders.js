@@ -83,7 +83,7 @@ const RecentOrders = () => {
                 <DataTableItem
                   key={idx}
                   onClick={() => {
-                    navigate(`/campaign-detail/${item.id}`);
+                    navigate(`/campaign-detail/${item._id}`);
                   }}
                 >
                   <DataTableRow>
