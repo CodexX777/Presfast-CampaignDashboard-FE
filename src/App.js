@@ -15,6 +15,9 @@ import Dashboard from "./pages/pre-built/dashboard/Dashboard";
 import AddStore from "./pages/pre-built/stores/AddStore";
 import CreateCampaign from "./pages/pre-built/Campaign/CreateCampaign";
 import PastCampaign from "./components/partials/default/recent-orders/PastCampaign";
+import StoreDetailsPage from "./pages/pre-built/stores/StoreDetail";
+
+
 const App = () => {
   const { isLoggedIn, token, login, logout, uid, userName, role } = useAuth();
 
@@ -31,6 +34,7 @@ const App = () => {
           <Route path="/hungry-jack-list" element={<HungryJackProductCard />}></Route>
           <Route path="/stores" element={<StoreList />}></Route>
           <Route path="/add-store" element={<AddStore />}></Route>
+          <Route path="/storeDetail/:storeId" element={<StoreDetailsPage />}></Route>
           <Route path="/create-campaign" element={<CreateCampaign />}></Route>
           <Route path="/past-campaigns" element={<PastCampaign />}></Route>
           <Route path="*" element={<Navigate replace to="/" />} />

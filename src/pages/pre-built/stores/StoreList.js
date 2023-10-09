@@ -97,6 +97,12 @@ const StoreList = () => {
     console.log("newData", newData);
   };
 
+  function handleNavigation(id) {
+    // Use the navigate function to navigate to the desired route
+    navigate(`/storeDetail/${id}`)
+    //navigate(`/userDetail`)
+  }
+
   // function to change the check property of an item
   const selectorCheck = (e) => {
     let newData;
@@ -178,9 +184,9 @@ const StoreList = () => {
             {/*Head*/}
             {currentItems?.length > 0
               ? currentItems?.map((item) => (
-                  <DataTableItem key={item._id}>
+          
+                  <DataTableItem style={{color: "red"}} key={item._id} onClick={() => handleNavigation(item._id)} >
                     <DataTableRow>
-                      <Link to={`${process.env.PUBLIC_URL}/user-details-regular/${item._id}`}>
                         <div className="user-card">
                           <div className="user-info">
                             <span className="tb-lead">
@@ -188,7 +194,6 @@ const StoreList = () => {
                             </span>
                           </div>
                         </div>
-                      </Link>
                     </DataTableRow>
                     <DataTableRow size="md">
                       <span>{item.storeName}</span>
@@ -200,6 +205,7 @@ const StoreList = () => {
                       <span>{item.storeRegion}</span>
                     </DataTableRow>
                   </DataTableItem>
+                  
                 ))
               : null}
           </div>

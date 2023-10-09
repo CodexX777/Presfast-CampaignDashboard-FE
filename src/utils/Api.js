@@ -218,6 +218,16 @@ const getCampaignList = async (token) => {
   }
 };
 
+const getIndividualStore = async (storeId) => {
+  try {
+    const response = await api.get(`/items/store-data?id=${storeId}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export {
   login,
   getUsers,
@@ -232,4 +242,5 @@ export {
   uploadHungryJackProduct,
   getStoreTypeOptions,
   getAllHungryJackProducts,
+  getIndividualStore
 };
