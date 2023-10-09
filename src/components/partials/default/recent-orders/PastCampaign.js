@@ -11,11 +11,13 @@ import {
 import { getCampaignList } from "../../../../utils/Api";
 import { AuthContext } from "../../../../context/AuthContext";
 import { Block } from "../../../Component";
+import { useNavigate } from "react-router";
 const PastCampaign = () => {
   const auth = useContext(AuthContext);
   const [campaignData, setCampaignData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   const [itemsPerPage] = useState(10);
   useEffect(() => {
     setIsLoading(true);
@@ -52,18 +54,6 @@ const PastCampaign = () => {
               <div className="card-title-group">
                 <div className="card-title">
                   <h6 className="title">Previous Campaigns</h6>
-                  {/* {isLoading && (
-                    <div>
-                      <Spinner
-                        type="grow"
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                        }}
-                      />
-                    </div>
-                  )} */}
                 </div>
               </div>
             </div>
@@ -88,12 +78,16 @@ const PastCampaign = () => {
 
               {!isLoading &&
                 currentItems.map((item, idx) => (
-                  <DataTableItem key={item.jobNumber}>
+                  <DataTableItem
+                    key={item.jobNumber}
+                    onClick={() => {
+                      console.log("item", item);
+                      navigate(`/campaign-detail/${item._id}`);
+                    }}
+                  >
                     <DataTableRow>
-                      <span className="tb-lead">
-                        <a href="#order" onClick={(ev) => ev.preventDefault()}>
-                          #{item.jobNumber}
-                        </a>
+                      <span className="tb-lead" style={{ color: "#f68922" }}>
+                        #{item.jobNumber}
                       </span>
                     </DataTableRow>
                     <DataTableRow size="sm">

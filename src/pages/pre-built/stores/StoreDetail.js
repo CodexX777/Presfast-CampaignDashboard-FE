@@ -269,7 +269,7 @@ const StoreDetailsPage = () => {
                   </ModalBody>
                 </Modal>
 
-                <Sidebar toggleState={sideBar}>
+                {/* <Sidebar toggleState={sideBar}>
                   <div className="card-inner">
                     <div className="user-card user-card-s2 mt-5 mt-xxl-0">
                       <UserAvatar className="lg" theme="primary"  />
@@ -484,7 +484,7 @@ const StoreDetailsPage = () => {
                     </ul>
                   </div>
                 </Sidebar>
-                {sideBar && <div className="toggle-overlay" onClick={() => toggle()}></div>}
+                {sideBar && <div className="toggle-overlay" onClick={() => toggle()}></div>} */}
               </div>
             </Card>
           </Block>

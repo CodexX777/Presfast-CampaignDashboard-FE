@@ -228,6 +228,20 @@ const getIndividualStore = async (storeId) => {
   }
 };
 
+const getCampaignData = async (token, campaignId) => {
+  try {
+    const response = await api.get(`/items/getCampaign?campaignId=${campaignId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export {
   login,
   getUsers,
@@ -235,6 +249,7 @@ export {
   addStore,
   createCampaign,
   getCampaignList,
+  getCampaignData,
   getAllStores,
   getRecentCampaignList,
   uploadPresfastProduct,
@@ -242,5 +257,5 @@ export {
   uploadHungryJackProduct,
   getStoreTypeOptions,
   getAllHungryJackProducts,
-  getIndividualStore
+  getIndividualStore,
 };

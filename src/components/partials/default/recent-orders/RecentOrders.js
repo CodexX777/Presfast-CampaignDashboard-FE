@@ -4,8 +4,10 @@ import { DataTableHead, DataTableRow, DataTableItem, UserAvatar } from "../../..
 import { getRecentCampaignList } from "../../../../utils/Api";
 import { AuthContext } from "../../../../context/AuthContext";
 import { Spinner } from "reactstrap";
+import { useNavigate } from "react-router";
 const RecentOrders = () => {
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [recentOrderData, setRecentOrderData] = useState([]);
   useEffect(() => {
@@ -78,7 +80,12 @@ const RecentOrders = () => {
 
             {!isLoading &&
               recentOrderData.map((item, idx) => (
-                <DataTableItem key={idx}>
+                <DataTableItem
+                  key={idx}
+                  onClick={() => {
+                    navigate(`/campaign-detail/${item.id}`);
+                  }}
+                >
                   <DataTableRow>
                     <span className="tb-lead">
                       <a href="#order" onClick={(ev) => ev.preventDefault()}>

@@ -17,6 +17,7 @@ import CreateCampaign from "./pages/pre-built/Campaign/CreateCampaign";
 import PastCampaign from "./components/partials/default/recent-orders/PastCampaign";
 import StoreDetailsPage from "./pages/pre-built/stores/StoreDetail";
 import "./App.css";
+import OrderDetails from "./components/partials/default/recent-orders/orderDetails";
 
 const App = () => {
   const { isLoggedIn, token, login, logout, uid, userName, role } = useAuth();
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/storeDetail/:storeId" element={<StoreDetailsPage />}></Route>
           <Route path="/create-campaign" element={<CreateCampaign />}></Route>
           <Route path="/past-campaigns" element={<PastCampaign />}></Route>
+          <Route path="/campaign-detail/:id" element={<OrderDetails />}></Route>
           <Route path="*" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { DropdownMenu, DropdownToggle, UncontrolledDropdown, DropdownItem } from "reactstrap";
+import { DropdownMenu, DropdownToggle, UncontrolledDropdown, DropdownItem, Spinner } from "reactstrap";
 import {
   Block,
   BlockBetween,
@@ -36,7 +36,7 @@ const StoreList = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [storeCount, setStoreCount] = useState(0);
   //fetch all he stores
   const fetchStores = async () => {
@@ -45,15 +45,16 @@ const StoreList = () => {
       console.log(res.data.data);
       setData([...res.data.data.storeData]);
       setStoreCount(res.data.data.storeCount);
+      setIsLoading(false);
     } catch (error) {
       toast.error(error.response.data.message);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    if (auth?.token) {
-      fetchStores();
-    }
+    setIsLoading(true);
+    fetchStores();
   }, []);
   //   const [sm, updateSm] = useState(false);
   const [onSearchText] = useState("");
@@ -99,7 +100,7 @@ const StoreList = () => {
 
   function handleNavigation(id) {
     // Use the navigate function to navigate to the desired route
-    navigate(`/storeDetail/${id}`)
+    navigate(`/storeDetail/${id}`);
     //navigate(`/userDetail`)
   }
 
@@ -184,16 +185,15 @@ const StoreList = () => {
             {/*Head*/}
             {currentItems?.length > 0
               ? currentItems?.map((item) => (
-          
-                  <DataTableItem style={{color: "red"}} key={item._id} onClick={() => handleNavigation(item._id)} >
+                  <DataTableItem style={{ color: "red" }} key={item._id} onClick={() => handleNavigation(item._id)}>
                     <DataTableRow>
-                        <div className="user-card">
-                          <div className="user-info">
-                            <span className="tb-lead">
-                              {item.storeNumber} <span className="dot dot-success d-md-none ms-1"></span>
-                            </span>
-                          </div>
+                      <div className="user-card">
+                        <div className="user-info">
+                          <span className="tb-lead">
+                            {item.storeNumber} <span className="dot dot-success d-md-none ms-1"></span>
+                          </span>
                         </div>
+                      </div>
                     </DataTableRow>
                     <DataTableRow size="md">
                       <span>{item.storeName}</span>
@@ -205,7 +205,6 @@ const StoreList = () => {
                       <span>{item.storeRegion}</span>
                     </DataTableRow>
                   </DataTableItem>
-                  
                 ))
               : null}
           </div>
@@ -217,6 +216,10 @@ const StoreList = () => {
                 paginate={setCurrentPage}
                 currentPage={currentPage}
               />
+            ) : isLoading ? (
+              <div className="text-center">
+                <Spinner type="grow" />
+              </div>
             ) : (
               <div className="text-center">
                 <span className="text-silent">No data found</span>
