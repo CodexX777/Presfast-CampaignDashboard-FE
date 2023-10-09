@@ -22,11 +22,11 @@ import {
 import { Badge } from "reactstrap";
 import { AuthContext } from "../../../../context/AuthContext";
 import { createCampaign } from "../../../../utils/Api";
-
+import { useNavigate } from "react-router";
 const QuantityPerStore = ({ prevData, setPrevData, setStep }) => {
   const auth = useContext(AuthContext);
   const [selectedProducts, setSelectedProducts] = useState([...prevData?.selectedProducts]);
-
+  const navigate = useNavigate();
   const [transformedProducts, setTransformedProducts] = useState([...prevData?.regionSelectionData]);
 
   console.log("selectedProducts", selectedProducts);
@@ -70,15 +70,15 @@ const QuantityPerStore = ({ prevData, setPrevData, setStep }) => {
   };
 
   return (
-    <div className="p-4">
-      <button
+    <div className="p-4 mt-4">
+      {/* <button
         onClick={() => {
           setStep(5);
         }}
       >
         back
-      </button>
-      <h6>Select campaign regions for each material</h6>
+      </button> */}
+      {/* <h6>Select campaign regions for each material</h6> */}
       <div className="nk-tb-list is-separate is-medium mb-3">
         <DataTableHead className="nk-tb-item">
           <DataTableRow>
@@ -218,7 +218,7 @@ const QuantityPerStore = ({ prevData, setPrevData, setStep }) => {
             ))
           : null}
       </div>
-      <Button
+      {/* <Button
         color="primary"
         size="md"
         onClick={() => {
@@ -229,7 +229,40 @@ const QuantityPerStore = ({ prevData, setPrevData, setStep }) => {
         }}
       >
         Schedule Campaign
-      </Button>
+      </Button> */}
+      <Col size="12">
+        <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+          <li>
+            <Button
+              color="primary"
+              size="md"
+              onClick={() => {
+                //save data
+                const newData = { ...prevData, regionSelectionData: [...transformedProducts] };
+                setPrevData(newData);
+                setStep((prev) => prev - 1);
+              }}
+            >
+              Back
+            </Button>
+          </li>
+          <li>
+            <Button
+              color="primary"
+              size="md"
+              onClick={() => {
+                const newData = { ...prevData, regionSelectionData: [...transformedProducts] };
+                setPrevData(newData);
+                handleSubmit(newData);
+                navigate("/");
+                //   setStep(7);
+              }}
+            >
+              Schedule Campaign
+            </Button>
+          </li>
+        </ul>
+      </Col>
     </div>
   );
 };

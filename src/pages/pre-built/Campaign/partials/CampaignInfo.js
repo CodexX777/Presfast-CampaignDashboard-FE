@@ -1,15 +1,21 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Col, Button } from "../../../../components/Component";
+import { useNavigate } from "react-router";
 const CampaignInfo = ({ prevData, setPrevData, setStep }) => {
   const [formData, setFormData] = useState({
     promotionName: "",
     projectLead: "",
     jobNumber: "",
     campaignLiveDate: "",
-    dueDate: "",
+    dueDate: new Date().toISOString().slice(0, 10),
   });
 
+  const twoDaysAhead = new Date();
+  twoDaysAhead.setDate(twoDaysAhead.getDate() + 2);
+  const [artworkDueDate, setArtworkDueDate] = useState(twoDaysAhead.toISOString().slice(0, 10));
+
+  const navigate = useNavigate();
   useEffect(() => {
     setFormData({ ...prevData.campaignInfo });
   }, [prevData]);
@@ -26,8 +32,8 @@ const CampaignInfo = ({ prevData, setPrevData, setStep }) => {
       alert("Please fill all the fields");
       return;
     }
-    setPrevData({ ...prevData, campaignInfo: formData });
-    setStep(2);
+    setPrevData({ ...prevData, campaignInfo: { ...formData, dueDate: artworkDueDate } });
+    setStep((prev) => prev + 1);
   };
 
   return (
@@ -91,19 +97,23 @@ const CampaignInfo = ({ prevData, setPrevData, setStep }) => {
       <Col md="6">
         <div className="form-group">
           <label className="form-label">Artwork Due Date</label>
-          <input
-            className="form-control"
-            type="date"
-            placeholder="Due date"
-            value={formData.dueDate}
-            onChange={(e) => {
-              setFormData({ ...formData, dueDate: e.target.value });
-            }}
-          />
+          <input className="form-control" type="date" placeholder="Due date" value={artworkDueDate} disabled />
         </div>
       </Col>
       <Col size="12">
         <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+          <li>
+            <Button
+              color="primary"
+              size="md"
+              onClick={() => {
+                //save data
+                navigate("/");
+              }}
+            >
+              Back
+            </Button>
+          </li>
           <li>
             <Button color="primary" size="md" onClick={handleSubmit}>
               Next

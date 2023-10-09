@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { DropdownMenu, DropdownToggle, UncontrolledDropdown, DropdownItem } from "reactstrap";
+import { DropdownMenu, DropdownToggle, UncontrolledDropdown, DropdownItem, Spinner } from "reactstrap";
 import {
   Block,
   BlockBetween,
@@ -34,23 +34,24 @@ import "react-toastify/dist/ReactToastify.css";
 const UserListDefaultPage = () => {
   const auth = useContext(AuthContext);
   const [data, setData] = useState([]);
-  const [userCount,setUserCount]=useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userCount, setUserCount] = useState(0);
   const fetchUsers = async () => {
     try {
       const res = await getUsers(auth.token);
       console.log(res.data.data);
       setData([...res.data.data.userList]);
-      setUserCount(res.data.data.totalUsers)
+      setUserCount(res.data.data.totalUsers);
     } catch (error) {
       toast.error(error.response.data.message);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    if (auth?.token) {
-      fetchUsers();
-    }
-  },[]);
+    setIsLoading(true);
+    fetchUsers();
+  }, []);
   const [sm, updateSm] = useState(false);
   const [onSearchText] = useState("");
 
@@ -247,10 +248,10 @@ const UserListDefaultPage = () => {
     <React.Fragment>
       {/* <ToastContainer /> */}
       <Head title="User List - Default"></Head>
-      <Content >
+      <Content>
         <BlockHead size="sm">
           <BlockBetween>
-            <BlockHeadContent style={{marginTop:"65px"}}>
+            <BlockHeadContent style={{ marginTop: "65px" }}>
               <BlockTitle tag="h3" page>
                 Users Lists
               </BlockTitle>
@@ -371,7 +372,7 @@ const UserListDefaultPage = () => {
                     <DataTableRow>
                       <Link to={`${process.env.PUBLIC_URL}/user-details-regular/${item._id}`}>
                         <div className="user-card">
-                          <UserAvatar theme={item.avatarBg} text={findUpper(item.userName)} ></UserAvatar>
+                          <UserAvatar theme={item.avatarBg} text={findUpper(item.userName)}></UserAvatar>
                           <div className="user-info">
                             <span className="tb-lead">
                               {item.userName} <span className="dot dot-success d-md-none ms-1"></span>
@@ -484,6 +485,10 @@ const UserListDefaultPage = () => {
                 paginate={paginate}
                 currentPage={currentPage}
               />
+            ) : isLoading ? (
+              <div className="text-center">
+                <Spinner type="grow" />
+              </div>
             ) : (
               <div className="text-center">
                 <span className="text-silent">No data found</span>

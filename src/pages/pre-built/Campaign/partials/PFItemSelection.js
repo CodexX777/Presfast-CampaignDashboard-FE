@@ -35,7 +35,7 @@ const PFItemSelection = ({ prevData, setPrevData, setStep }) => {
       console.log(res.data.products);
       if (res.status === 200) {
         const fetchedProducts = res?.data?.products;
-        console.log("fetchedProducts",fetchedProducts);
+        console.log("fetchedProducts", fetchedProducts);
         const newProducts = fetchedProducts.map((product) => {
           return {
             value: product._id,
@@ -53,15 +53,15 @@ const PFItemSelection = ({ prevData, setPrevData, setStep }) => {
   const auth = useContext(AuthContext);
   console.log("presfastItems", presfastItems);
   return (
-    <div className="p-4">
-      <button
+    <div className="p-4 mt-4">
+      {/* <button
         onClick={() => {
           setStep(2);
         }}
       >
         back
-      </button>
-      <h6>Select Campaign Items for your products</h6>
+      </button> */}
+      {/* <h6>Select Campaign Items for your products</h6> */}
       <div className="nk-tb-list is-separate is-medium mb-3">
         <DataTableHead className="nk-tb-item">
           <DataTableRow>
@@ -95,7 +95,7 @@ const PFItemSelection = ({ prevData, setPrevData, setStep }) => {
                   </div>
                 </DataTableRow>
                 <DataTableRow>
-                  <div className="form-group">
+                  <div className="form-group" style={{ maxWidth: "300px", width: "300px", wordWrap: "break-word" }}>
                     <div className="form-control-wrap">
                       <RSelect
                         isMulti={true}
@@ -148,7 +148,7 @@ const PFItemSelection = ({ prevData, setPrevData, setStep }) => {
             ))
           : null}
       </div>
-      <Button
+      {/* <Button
         color="primary"
         size="md"
         onClick={() => {
@@ -157,7 +157,36 @@ const PFItemSelection = ({ prevData, setPrevData, setStep }) => {
         }}
       >
         Next
-      </Button>
+      </Button> */}
+      <Col size="12">
+        <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+          <li>
+            <Button
+              color="primary"
+              size="md"
+              onClick={() => {
+                //save data
+                setPrevData({ ...prevData, selectedProducts: [...selectedProducts] });
+                setStep((prev) => prev - 1);
+              }}
+            >
+              Back
+            </Button>
+          </li>
+          <li>
+            <Button
+              color="primary"
+              size="md"
+              onClick={() => {
+                setPrevData({ ...prevData, selectedProducts: [...selectedProducts] });
+                setStep((prev) => prev + 1);
+              }}
+            >
+              Next
+            </Button>
+          </li>
+        </ul>
+      </Col>
     </div>
   );
 };

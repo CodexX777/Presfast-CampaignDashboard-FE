@@ -128,7 +128,7 @@ const ProductSelection = ({ prevData, setPrevData, setStep }) => {
       return;
     }
     setPrevData({ ...prevData, selectedProducts: selectedProducts });
-    setStep(3);
+    setStep((prev) => prev + 1);
   };
 
   console.log("selectedProducts", selectedProducts);
@@ -148,7 +148,7 @@ const ProductSelection = ({ prevData, setPrevData, setStep }) => {
         </BlockHead>
 
         <Block>
-          <Button
+          {/* <Button
             onClick={() => {
               setStep(1);
             }}
@@ -161,7 +161,7 @@ const ProductSelection = ({ prevData, setPrevData, setStep }) => {
             }}
           >
             Save
-          </Button>
+          </Button> */}
           <div className="nk-tb-list is-separate is-medium mb-3">
             <DataTableHead className="nk-tb-item">
               <DataTableRow className="nk-tb-col-check">
@@ -218,6 +218,28 @@ const ProductSelection = ({ prevData, setPrevData, setStep }) => {
                   </DataTableItem>
                 ))
               : null}
+            <Col size="12" className="mt-4">
+              <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                <li>
+                  <Button
+                    color="primary"
+                    size="md"
+                    onClick={() => {
+                      //save data
+                      setPrevData({ ...prevData, selectedProducts: selectedProducts });
+                      setStep((prev) => prev - 1);
+                    }}
+                  >
+                    Back
+                  </Button>
+                </li>
+                <li>
+                  <Button color="primary" size="md" onClick={handleSubmit}>
+                    Next
+                  </Button>
+                </li>
+              </ul>
+            </Col>
           </div>
         </Block>
       </Content>

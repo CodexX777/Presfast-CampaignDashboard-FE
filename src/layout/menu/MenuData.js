@@ -56,8 +56,8 @@ const menu = [
   },
   {
     icon: "activity-round-fill",
-    text: "Sales",
-    link: "/sales",
+    text: "Past Campaigns",
+    link: "/past-campaigns",
   },
   {
     icon: "growth-fill",

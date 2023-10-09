@@ -64,20 +64,20 @@ const StoreTypeSelection = ({ prevData, setPrevData, setStep }) => {
     fetchStoreTypeOptions();
 
     console.log(postData);
-  }, []);
+  }, [prevData?.regionSelectionData]);
 
   console.log(transformedProducts);
 
   return (
-    <div className="p-4">
-      <button
+    <div className="p-4 mt-4">
+      {/* <button
         onClick={() => {
           setStep(4);
         }}
       >
         back
-      </button>
-      <h6>Select campaign regions for each material</h6>
+      </button> */}
+      {/* <h6>Select campaign regions for each material</h6> */}
       <div className="nk-tb-list is-separate is-medium mb-3">
         <DataTableHead className="nk-tb-item">
           <DataTableRow>
@@ -166,16 +166,36 @@ const StoreTypeSelection = ({ prevData, setPrevData, setStep }) => {
             ))
           : null}
       </div>
-      <Button
-        color="primary"
-        size="md"
-        onClick={() => {
-          setPrevData({ ...prevData, regionSelectionData: [...transformedProducts] });
-          setStep(6);
-        }}
-      >
-        Next
-      </Button>
+
+      <Col size="12">
+        <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+          <li>
+            <Button
+              color="primary"
+              size="md"
+              onClick={() => {
+                //save data
+                setPrevData({ ...prevData, regionSelectionData: [...transformedProducts] });
+                setStep((prev) => prev - 1);
+              }}
+            >
+              Back
+            </Button>
+          </li>
+          <li>
+            <Button
+              color="primary"
+              size="md"
+              onClick={() => {
+                setPrevData({ ...prevData, regionSelectionData: [...transformedProducts] });
+                setStep((prev) => prev + 1);
+              }}
+            >
+              Next
+            </Button>
+          </li>
+        </ul>
+      </Col>
     </div>
   );
 };

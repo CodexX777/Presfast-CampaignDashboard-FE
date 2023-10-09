@@ -16,7 +16,7 @@ import AddStore from "./pages/pre-built/stores/AddStore";
 import CreateCampaign from "./pages/pre-built/Campaign/CreateCampaign";
 import PastCampaign from "./components/partials/default/recent-orders/PastCampaign";
 import StoreDetailsPage from "./pages/pre-built/stores/StoreDetail";
-
+import "./App.css";
 
 const App = () => {
   const { isLoggedIn, token, login, logout, uid, userName, role } = useAuth();
